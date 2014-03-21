@@ -1,0 +1,37 @@
+
+import os
+
+print os.getcwd()
+source_list=filter(lambda x:x[-4:]=='.cpp',os.listdir(os.getcwd()))
+print source_list
+header_list=filter(lambda x:x[-2:]=='.h',os.listdir('../include'))
+print header_list
+source_list.append('../.moc/moc_mainwindow.cpp')
+source_list.append('../res/qrc_res.cpp')
+
+env=Environment()
+
+env.Append(CPPPATH = ['.','/usr/include','../include',
+                      '../extern/cxcore/include',
+                      '/usr/include/qt4/',
+                      '/usr/include/qt4/QtCore',
+                      '/usr/include/qt4/QtGui',
+                      '/usr/include/qt4/QtOpenGL'])
+debug = ARGUMENTS.get('debug', 1)
+win32 = ARGUMENTS.get('win32', 0)
+if int(debug):
+  env.Append(CPPFLAGS = ['-g','-Wall'])
+  env.Append(OBJPREFIX = '.obj_debug/')
+else:
+  env.Append(CPPFLAGS = ['-O2','-Wall'])
+  env.Append(OBJPREFIX = '.obj_release/')
+    
+env.Append(LIBS = ['cxcore','QtCore','QtGui','QtOpenGL','GL','GLU'])
+env.Append(LIBPATH = ['/usr/lib'])
+env.Append(RPATH = ['/usr/lib','.'])
+
+# compile ui
+UIC='uic $SOURCE -o $TARGET'
+Command(target='../include/ui_brainbrowser.h',source='brainbrowser.ui',action=UIC)
+
+env.Program(target='../brainbrowser',source=source_list,header=header_list)
