@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcxcore", "extern\cxcore\libcxcore.vcproj", "{85341BA1-FD19-3F06-8A15-1FC8AE68D44C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "brainbrowser", "brainbrowser.vcproj", "{B850EB2E-8071-386E-B26C-5E8F30E28527}"
+	ProjectSection(ProjectDependencies) = postProject
+		{85341BA1-FD19-3F06-8A15-1FC8AE68D44C} = {85341BA1-FD19-3F06-8A15-1FC8AE68D44C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
