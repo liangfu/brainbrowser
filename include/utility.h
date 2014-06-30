@@ -19,6 +19,9 @@
 #include <memory.h>
 #include <ctype.h>
 
+#include <QtOpenGL>
+#include <GL/glu.h>
+
 #include "cxcore.h"
 
 //-------------------------------------------------------
@@ -218,5 +221,33 @@ int cvGetFileSuffix(const char * fullname, char * suffix)
   strncpy(suffix,fullname+retval,len-retval);
   return retval;
 }
+
+#if 1
+static void glDrawWiredCube()
+{
+  float verts[]={
+    -1.f, -1.f, -1.f, // 0
+    -1.f,  1.f, -1.f, // 1
+    1.f,  1.f, -1.f, // 2
+    1.f, -1.f, -1.f, // 3
+    -1.f, -1.f,  1.f, // 4
+    -1.f,  1.f,  1.f, // 5
+    1.f,  1.f,  1.f, // 6
+    1.f, -1.f,  1.f  // 7 
+  };
+  int faces[]={
+    0,1,2,3,
+    4,5,6,7,
+    0,1,5,4,
+    3,2,6,7
+  };
+  int i,j;
+  for (i=0;i<4;i++){
+    glBegin(GL_LINE_LOOP);
+    for (j=0;j<4;j++){glVertex3fv((verts+faces[i*4+j]*3));}
+    glEnd();
+  }
+}
+#endif
 
 #endif // __COMP_VIS_H__

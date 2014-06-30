@@ -1,12 +1,12 @@
 /**
- * @file   mainwindow.h
- * @author Liangfu Chen <liangfu.chen@nlpr.ia.ac.cn>
- * @date   Thu Jan 23 20:35:25 2014
- * 
- * @brief  
- * 
- * 
- */
+* @file   mainwindow.h
+* @author Liangfu Chen <liangfu.chen@nlpr.ia.ac.cn>
+* @date   Thu Jan 23 20:35:25 2014
+* 
+* @brief  
+* 
+* 
+*/
 
 #ifndef __MAIN_WINDOW_H__
 #define __MAIN_WINDOW_H__
@@ -20,12 +20,15 @@
 
 #include "utility.h"
 //#include "imageviewer.h"
-#include "meshviewer.h"
+#include "glcanvas.h"
 
 class MainWindow : public QMainWindow,public Ui::MainWindow
 {
   Q_OBJECT
-  
+
+private:
+  GLCanvas * glcanvas;
+
 public:
   // Worker * m_pDataWorker;
   static const int DisplayMode_IMAGE=1;
@@ -33,94 +36,100 @@ public:
 
   void openFile(QString fname)
   {
-	if (!fname.isEmpty())
-	{
-	  qDebug(fname.toAscii());
-	  char tmp[1024];
-	  sprintf(tmp,"%s",qPrintable(fname));
-	  char suffix[1024];
-	  cvGetFileSuffix(tmp,suffix);
-	  if (!strncmp(suffix+1,"obj",3)){
-		//displayMesh(fname);
-		//glcanvas->display(fname);
-	  }else if (!strncmp(suffix+1,"rawiv",5)){
-	  }else{
-		QMessageBox::warning(this,"Load data error","File extension not recognized!");
-	  }
-	}
+    if (!fname.isEmpty())
+    {
+      qDebug(fname.toAscii());
+      char tmp[1024];
+      sprintf(tmp,"%s",qPrintable(fname));
+      char suffix[1024];
+      cvGetFileSuffix(tmp,suffix);
+      if (!strncmp(suffix+1,"obj",3)){
+        //displayMesh(fname);
+        glcanvas->display(fname);
+      }else if (!strncmp(suffix+1,"rawiv",5)){
+      }else{
+        QMessageBox::warning(this,"Load data error","File extension not recognized!");
+      }
+    }
   }
 
 protected:
   void dragEnterEvent(QDragEnterEvent *e)
   {
     if (e->mimeData()->hasUrls()) {
-	  e->acceptProposedAction();
-	}
+      e->acceptProposedAction();
+    }
   }
 
   void dropEvent(QDropEvent *e)
   {
-	int i;
+    int i;
     for (i=0;i<e->mimeData()->urls().count();i++) {
-	  const QUrl url=e->mimeData()->urls()[i];
-	  const QString fname = url.toLocalFile();
-	  openFile(fname);
-	}
+      const QUrl url=e->mimeData()->urls()[i];
+      const QString fname = url.toLocalFile();
+      openFile(fname);
+    }
   }
 
 private slots:
   void on_actionOpen_triggered()
   {
-	QString fname =
-	  QFileDialog::getOpenFileName(this,"select file",".",
-								   "Mesh data [*.obj] (*.obj);;"
-								   "Volume data [*.rawiv] (*.rawiv)");
-	openFile(fname);
+    QString fname =
+      QFileDialog::getOpenFileName(this,"select file",".",
+      "Mesh data [*.obj] (*.obj);;"
+      "Volume data [*.rawiv] (*.rawiv)");
+    openFile(fname);
   }
-  
+
   void on_actionToolbar_toggled()
   {
-	if (actionToolbar->isChecked()){
-	  toolBar->show();
-	}else{
-	  toolBar->hide();
-	}
+    if (actionToolbar->isChecked()){
+      toolBar->show();
+    }else{
+      toolBar->hide();
+    }
   }
-  
+
   void on_actionStatusbar_toggled()
   {
-	if (actionStatusbar->isChecked()){
-	  statusbar->show();
-	}else{
-	  statusbar->hide();
-	}
+    if (actionStatusbar->isChecked()){
+      statusbar->show();
+    }else{
+      statusbar->hide();
+    }
   }
-  
+
   void on_actionAbout_triggered()
   {
-	QMessageBox::about(this, tr("About CompVis"),
-					   tr("<b>CompVis</b> is an application designed for "
-						  "vision-base media content manipulations."));
+    QMessageBox::about(this, tr("About CompVis"),
+      tr("<b>CompVis</b> is an application designed for "
+      "vision-base media content manipulations."));
   }
 
-private slots:
-  void postprocess()
-  {
-	if (glcanvas){
-	  if (!glcanvas->initialized()){glcanvas->postprocess();}
-	}
-  }
-  
+//private slots:
+//  void postprocess()
+//  {
+//    if (glcanvas){
+//      if (!glcanvas->initialized()){glcanvas->postprocess();}
+//    }
+//  }
+
 public:
-  MainWindow(QWidget * parent=0):
-	QMainWindow(parent)//,m_initialized(0)//,glcanvas(NULL)
+  MainWindow(QWidget * parent=0):QMainWindow(parent),glcanvas(new GLCanvas(this))//,m_initialized(0)//
   {
-	setupUi(this);
+    setupUi(this);
+    setCentralWidget(glcanvas);
+    glcanvas->updateGL();
 
-	QTimer * timer=new QTimer(this);
-	timer->setSingleShot(1);
-	connect(timer,SIGNAL(timeout()),this,SLOT(postprocess()));
-	timer->start(200);
+    //QTimer * timer=new QTimer(this);
+    //timer->setSingleShot(1);
+    //connect(timer,SIGNAL(timeout()),this,SLOT(postprocess()));
+    //timer->start(200);
+  }
+
+  ~MainWindow()
+  {
+    if (glcanvas) { delete glcanvas; glcanvas=0; }
   }
 };
 
