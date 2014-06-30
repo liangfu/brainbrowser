@@ -21,5 +21,6 @@ win32:RC_FILE = res/appicon.rc
 # Input
 FORMS += src/brainbrowser.ui
 RESOURCES += res/res.qrc
-HEADERS += include/mainwindow.h include/meshviewer.h include/utility.h 
-SOURCES += src/main.cpp src/surface_data.cpp
+HEADERS += include/mainwindow.h include/meshviewer.h include/volrender.h include/utility.h 
+SOURCES += src/main.cpp 
+#src/surface_data.cpp

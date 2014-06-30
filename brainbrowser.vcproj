@@ -207,16 +207,16 @@
 				RelativePath="src\main.cpp"
 				>
 			</File>
-			<File
-				RelativePath="src\surface_data.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\include\glcanvas.h"
+				>
+			</File>
 			<File
 				RelativePath="include\mainwindow.h"
 				>
@@ -244,11 +244,11 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="include\meshviewer.h"
+				RelativePath="include\utility.h"
 				>
 			</File>
 			<File
-				RelativePath="include\utility.h"
+				RelativePath="include\volrender.h"
 				>
 			</File>
 		</Filter>
@@ -290,7 +290,7 @@
 						Name="VCCustomBuildTool"
 						Description="UIC src\brainbrowser.ui"
 						CommandLine="D:\Qt\4.8.5\bin\uic.exe src\brainbrowser.ui -o include\ui_brainbrowser.h&#x0D;&#x0A;"
-						AdditionalDependencies="D:\Qt\4.8.5\bin\uic.exe;colortable.h;meshviewer.h;src\brainbrowser.ui"
+						AdditionalDependencies="D:\Qt\4.8.5\bin\uic.exe;colortable.h;src\brainbrowser.ui"
 						Outputs="include\ui_brainbrowser.h"
 					/>
 				</FileConfiguration>
@@ -301,7 +301,7 @@
 						Name="VCCustomBuildTool"
 						Description="UIC src\brainbrowser.ui"
 						CommandLine="D:\Qt\4.8.5\bin\uic.exe src\brainbrowser.ui -o include\ui_brainbrowser.h&#x0D;&#x0A;"
-						AdditionalDependencies="D:\Qt\4.8.5\bin\uic.exe;colortable.h;meshviewer.h;src\brainbrowser.ui"
+						AdditionalDependencies="D:\Qt\4.8.5\bin\uic.exe;colortable.h;src\brainbrowser.ui"
 						Outputs="include\ui_brainbrowser.h"
 					/>
 				</FileConfiguration>
