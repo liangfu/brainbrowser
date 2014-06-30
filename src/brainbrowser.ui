@@ -21,18 +21,7 @@
     <normaloff>:/icon/appicon.png</normaloff>:/icon/appicon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="MeshViewer" name="glcanvas" native="true">
-      <property name="minimumSize">
-       <size>
-        <width>640</width>
-        <height>480</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <layout class="QGridLayout" name="gridLayout"/>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -40,7 +29,7 @@
      <x>0</x>
      <y>0</y>
      <width>1035</width>
-     <height>29</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -274,12 +263,6 @@
    <class>ColorTable</class>
    <extends>QWidget</extends>
    <header>colortable.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>MeshViewer</class>
-   <extends>QWidget</extends>
-   <header>meshviewer.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
