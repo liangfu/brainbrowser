@@ -10,12 +10,16 @@
 #ifndef __MESH_VIEWER_H__
 #define __MESH_VIEWER_H__
 
-#include <QtGui>
+#if 1
+#include "volrender.h"
+#else
 #include <QtOpenGL>
+#endif
+
+#include <QtGui>
 #include <GL/glu.h>
 
 //#include "surface_data.h"
-//#include ""
 #include "utility.h"
 
 //void glDrawWiredCube();

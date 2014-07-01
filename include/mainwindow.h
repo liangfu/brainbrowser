@@ -11,16 +11,15 @@
 #ifndef __MAIN_WINDOW_H__
 #define __MAIN_WINDOW_H__
 
+#include "glcanvas.h"
+
 #include <stdio.h>
 #include <assert.h>
 
 #include "ui_brainbrowser.h"
 #include <QtGui>
-//#include <QtOpenGL>
 
 #include "utility.h"
-//#include "imageviewer.h"
-#include "glcanvas.h"
 
 class MainWindow : public QMainWindow,public Ui::MainWindow
 {

@@ -55,6 +55,12 @@ int fakemain(int argc, char *argv[])
   if (opts.display){win.show();}
   //if (opts.display){win.postprocess();}
   if (opts.openfile&&opts.fname[0]){win.openFile(opts.fname);}
+
+  GLenum err = glewInit();
+  if (GLEW_OK != err) { // Problem: glewInit failed, something is seriously wrong. 
+    fprintf(stderr, "Error: %s\n", glewGetErrorString(err));return -1;
+  }
+
   retval=app.exec();
   return retval;
 }

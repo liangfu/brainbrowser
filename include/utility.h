@@ -19,7 +19,7 @@
 #include <memory.h>
 #include <ctype.h>
 
-#include <QtOpenGL>
+//#include <QtOpenGL>
 #include <GL/glu.h>
 
 #include "cxcore.h"

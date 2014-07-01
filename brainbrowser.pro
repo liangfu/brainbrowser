@@ -15,12 +15,12 @@ TARGET = brainbrowser
 CONFIG += debug warn_off
 QT = core gui opengl
 unix:LIBS += -lGLU -llibcxcore -Llib
-win32:LIBS += -lGLU32 -llibcxcore -Llib
+win32:LIBS += -lGLU32 -llibcxcore -lglew32 -Llib
 win32:RC_FILE = res/appicon.rc
 
 # Input
 FORMS += src/brainbrowser.ui
 RESOURCES += res/res.qrc
-HEADERS += include/mainwindow.h include/meshviewer.h include/volrender.h include/utility.h 
-SOURCES += src/main.cpp 
+HEADERS += include/mainwindow.h include/glcanvas.h include/volrender.h include/surfrender.h include/utility.h 
+SOURCES += src/main.cpp src/volrender.cpp
 #src/surface_data.cpp
